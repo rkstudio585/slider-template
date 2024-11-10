@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Pulse Slider</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        /* Custom styles for the slider */
+        .slider-track {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6, #fb7185, #fcd34d);
+            border-radius: 10px;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .slider-thumb {
+            width: 24px;
+            height: 24px;
+            background-color: #fcd34d;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(252, 211, 77, 0.5), 0 0 20px rgba(252, 211, 77, 0.4);
+            animation: pulse 1.5s infinite;
+            transition: transform 0.3s ease;
+        }
+        .slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(252, 211, 77, 0.5), 0 0 20px rgba(252, 211, 77, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(252, 211, 77, 0.8), 0 0 40px rgba(252, 211, 77, 0.6);
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+
+    <div class="text-center">
+        <h1 class="text-3xl font-semibold text-white mb-10">Glowing Pulse Slider</h1>
+        <div class="flex items-center space-x-6">
+            <span id="slider-value" class="text-2xl font-medium text-yellow-400">50</span>
+            <div class="w-80 h-2 relative">
+                <div class="slider-track"></div>
+                <input type="range" id="slider" min="0" max="100" value="50" 
+                       class="absolute inset-0 w-full h-full opacity-0">
+                <div class="slider-thumb"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const $slider = $('#slider');
+            const $thumb = $('.slider-thumb');
+            const $track = $('.slider-track');
+            const $valueDisplay = $('#slider-value');
+
+            function updateSlider() {
+                const val = $slider.val();
+                const max = $slider.attr('max');
+                const percentage = (val / max) * 100;
+                $thumb.css('left', `calc(${percentage}% - 12px)`);
+                $valueDisplay.text(val);
+
+                // Update thumb color based on slider position
+                const colorArray = ['#60a5fa', '#a78bfa', '#f472b6', '#fb7185', '#fcd34d'];
+                const thumbColor = colorArray[Math.floor((val / max) * colorArray.length)];
+                $thumb.css('background-color', thumbColor);
+            }
+
+            $slider.on('input', updateSlider);
+            updateSlider();
+        });
+    </script>
+
+</body>
+</html>
