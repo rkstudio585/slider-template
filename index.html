@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Slider with Tailwind CSS and JavaScript</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        /* Custom styles for the slider */
+        .slider-track {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+        }
+        .slider-thumb {
+            width: 24px;
+            height: 24px;
+            background-color: #10b981;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900">
+
+    <div class="text-center">
+        <h1 class="text-2xl font-semibold text-white mb-8">Beautiful Slide Bar</h1>
+        <div class="flex items-center space-x-4">
+            <span id="slider-value" class="text-xl text-green-400">50</span>
+            <div class="w-64 h-2 bg-gray-300 rounded-lg relative">
+                <input type="range" id="slider" min="0" max="100" value="50" 
+                       class="slider-track w-full h-full appearance-none bg-transparent">
+                <div class="slider-thumb absolute transform -translate-x-1/2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const $slider = $('#slider');
+            const $thumb = $('.slider-thumb');
+            const $valueDisplay = $('#slider-value');
+
+            function updateSlider() {
+                const val = $slider.val();
+                const max = $slider.attr('max');
+                const percentage = (val / max) * 100;
+                $thumb.css('left', `${percentage}%`);
+                $valueDisplay.text(val);
+            }
+
+            $slider.on('input', updateSlider);
+            updateSlider();
+        });
+    </script>
+
+</body>
+</html>
