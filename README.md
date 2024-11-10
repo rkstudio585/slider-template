@@ -4,15 +4,18 @@ Welcome to the **Slider Template** project! This repository provides a collectio
 
 ---
 > ## Live demo Links
- > []()
 
- > []()
+ > [slider](https://slider-template.vercel.app)
 
- > []()
+ > [shadow effect thumb](https://slider-template.vercel.app/index2.html)
 
- > []()
+ > [glassmorphism-inspired](https://slider-template.vercel.app/index3.html)
 
- > []()
+ > [minimalist neon dot style](https://slider-template.vercel.app/index4.html)
+
+ > [dual-color progress bar effect](https://slider-template.vercel.app/index5.html)
+
+ > [glowing pulse effect](https://slider-template.vercel.app/index6.html)
 
 ---
 ## Table of Contents
